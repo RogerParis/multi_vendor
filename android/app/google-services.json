@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "171864275538",
+    "project_id": "multi-vendor-3cd78",
+    "storage_bucket": "multi-vendor-3cd78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171864275538:android:1eb031a8119f4ea1b27d8b",
+        "android_client_info": {
+          "package_name": "com.rogerparis.multi_vendor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171864275538-cusdad2h6e86gfhp71l9c973eq196k1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDA77aaToSSQvmj9C_dG-_brFF6rPyMFN0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171864275538-cusdad2h6e86gfhp71l9c973eq196k1g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
