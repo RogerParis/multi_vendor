@@ -1,7 +1,30 @@
 import 'package:flutter/material.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  List<String> titles = [
+    'My Store',
+    'Orders',
+    'Edit Profile',
+    'Manage Products',
+    'Balance',
+    'Statics',
+  ];
+
+  List<IconData> icons = [
+    Icons.store,
+    Icons.shop_2_outlined,
+    Icons.edit,
+    Icons.settings,
+    Icons.attach_money,
+    Icons.show_chart,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -27,27 +50,28 @@ class DashboardScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(8.0),
         child: GridView.count(
           crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 20,
+          mainAxisSpacing: 30,
+          crossAxisSpacing: 30,
           children: List.generate(6, (index) {
             return Card(
                 elevation: 15,
                 color: Colors.blueGrey.withOpacity(0.8),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
+                  children: [
                     Icon(
-                      Icons.store,
+                      icons[index],
                       size: 40,
                       color: Colors.cyan,
                     ),
                     Text(
-                      'My Store',
-                      style: TextStyle(
-                        fontSize: 23,
+                      titles[index],
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     )
