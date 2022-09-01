@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:multi_vendor/views/cart_screen.dart';
 import 'package:multi_vendor/views/category_screen.dart';
+import 'package:multi_vendor/views/dashboard_screen.dart';
 import 'package:multi_vendor/views/home_screen.dart';
 import 'package:multi_vendor/views/profile_screen.dart';
 
@@ -18,13 +19,11 @@ class _SellerHomeScreenState extends State<SellerHomeScreen> {
 
   final List<Widget> _pages = [
     const HomeScreen(),
-    CategoryScreen(),
+    const CategoryScreen(),
     const Center(
       child: Text('Shop Screen'),
     ),
-    const Center(
-      child: Text('Dashboard'),
-    ),
+    const DashboardScreen(),
     const Center(
       child: Text('Upload'),
     ),
