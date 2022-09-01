@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:multi_vendor/controllers/snack_bar_controller.dart';
 import 'package:multi_vendor/views/auth/landing_customer_screen.dart';
+import 'package:multi_vendor/views/seller_home_screen.dart';
 
 class SellerLoginScreen extends StatefulWidget {
   static const String routeName = 'SellerLoginScreen';
@@ -21,7 +22,7 @@ class _SellerLoginScreenState extends State<SellerLoginScreen> {
   late String password;
   bool isLoading = false;
 
-  void loginSeller() async {
+  loginSeller() async {
     try {
       if (_formKey.currentState!.validate()) {
         setState(() {
@@ -34,6 +35,9 @@ class _SellerLoginScreenState extends State<SellerLoginScreen> {
                 isLoading = false;
               }),
             );
+
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            SellerHomeScreen.routeName, (route) => false);
       } else {
         snackBar('Please Fields must not be empty', context);
       }

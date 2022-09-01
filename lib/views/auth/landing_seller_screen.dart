@@ -85,8 +85,7 @@ class _LandingSellerScreenState extends State<LandingSellerScreen> {
         snackBar('Please Fields must not be empty', context);
       }
     } catch (e) {
-      print('Error signing up user: ');
-      print(e.toString());
+      snackBar(e.toString(), context);
     }
   }
 
