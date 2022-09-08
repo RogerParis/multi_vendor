@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class UploadProductsScreen extends StatefulWidget {
   const UploadProductsScreen({Key? key}) : super(key: key);
@@ -92,7 +90,7 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                 child: SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
-                    maxLength: 100,
+                    maxLength: 800,
                     maxLines: 5,
                     decoration: InputDecoration(
                       labelText: 'Product Description',
@@ -106,6 +104,26 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: FloatingActionButton(
+              onPressed: (() {}),
+              child: const Icon(
+                Icons.photo_library,
+              ),
+            ),
+          ),
+          FloatingActionButton(
+            onPressed: (() {}),
+            child: const Icon(
+              Icons.upload,
+            ),
+          )
+        ],
       ),
     );
   }
