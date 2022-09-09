@@ -108,8 +108,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
-                      onChanged: (value) {
-                        price = double.parse(value);
+                      onSaved: (value) {
+                        price = double.parse(value!);
                       },
                     ),
                   ),
@@ -132,8 +132,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
-                      onChanged: (value) {
-                        quantity = int.parse(value);
+                      onSaved: (value) {
+                        quantity = int.parse(value!);
                       },
                     ),
                   ),
@@ -158,8 +158,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
-                      onChanged: (value) {
-                        productName = value;
+                      onSaved: (value) {
+                        productName = value!;
                       },
                     ),
                   ),
@@ -184,8 +184,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
-                      onChanged: (value) {
-                        productDescription = value;
+                      onSaved: (value) {
+                        productDescription = value!;
                       },
                     ),
                   ),
@@ -212,10 +212,19 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
           FloatingActionButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                print(price);
-                print(quantity);
-                print(productName);
-                print(productDescription);
+                _formKey.currentState!.save();
+                if (imageList!.isNotEmpty) {
+                  print(price);
+                  print(quantity);
+                  print(productName);
+                  print(productDescription);
+                  setState(() {
+                    imageList = [];
+                  });
+                  _formKey.currentState!.reset();
+                } else {
+                  snackBar('Please Pick Images', context);
+                }
               } else {
                 snackBar('Please Fields Must not be left emtpy', context);
               }
