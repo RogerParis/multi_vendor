@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor/controllers/snack_bar_controller.dart';
 
 class UploadProductsScreen extends StatefulWidget {
@@ -10,6 +13,38 @@ class UploadProductsScreen extends StatefulWidget {
 
 class _UploadProductsScreenState extends State<UploadProductsScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  late double price;
+  late int quantity;
+  late String productName;
+  late String productDescription;
+
+  final ImagePicker _picker = ImagePicker();
+
+  List<XFile>? imageList = [];
+
+  void pickProductImages() async {
+    try {
+      final pickedImages = await _picker.pickMultiImage(
+        maxHeight: 300,
+        maxWidth: 300,
+        imageQuality: 100,
+      );
+      setState(() {
+        imageList = pickedImages!;
+      });
+    } catch (e) {}
+  }
+
+  Widget displayImages() {
+    return ListView.builder(
+      itemCount: imageList!.length,
+      itemBuilder: (context, index) {
+        return Image.file(File(imageList![index].path));
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +60,16 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                     Container(
                       height: MediaQuery.of(context).size.height * 0.3,
                       width: MediaQuery.of(context).size.width * 0.5,
-                      color: Colors.blueGrey,
-                      child: const Center(
-                        child: Text(
-                          'You Have not\n \nPicked any Images',
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
+                      color: Colors.blueGrey.shade100,
+                      child: Center(
+                        child: imageList != null
+                            ? displayImages()
+                            : const Text(
+                                'You Have not\n \nPicked any Images',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
                       ),
                     ),
                     Text('Category Here')
@@ -64,6 +101,9 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
+                      onChanged: (value) {
+                        price = double.parse(value);
+                      },
                     ),
                   ),
                 ),
@@ -85,6 +125,9 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
+                      onChanged: (value) {
+                        quantity = int.parse(value);
+                      },
                     ),
                   ),
                 ),
@@ -108,6 +151,9 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
+                      onChanged: (value) {
+                        productName = value;
+                      },
                     ),
                   ),
                 ),
@@ -131,6 +177,9 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15)),
                       ),
+                      onChanged: (value) {
+                        productDescription = value;
+                      },
                     ),
                   ),
                 )
@@ -145,7 +194,9 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: FloatingActionButton(
-              onPressed: (() {}),
+              onPressed: (() {
+                pickProductImages();
+              }),
               child: const Icon(
                 Icons.photo_library,
               ),
@@ -154,7 +205,10 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
           FloatingActionButton(
             onPressed: () {
               if (_formKey.currentState!.validate()) {
-                print('Cool');
+                print(price);
+                print(quantity);
+                print(productName);
+                print(productDescription);
               } else {
                 snackBar('Please Fields Must not be left emtpy', context);
               }
