@@ -37,11 +37,18 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
   }
 
   Widget displayImages() {
-    return ListView.builder(
-      itemCount: imageList!.length,
-      itemBuilder: (context, index) {
-        return Image.file(File(imageList![index].path));
+    return InkWell(
+      onTap: () {
+        setState(() {
+          imageList = null;
+        });
       },
+      child: ListView.builder(
+        itemCount: imageList!.length,
+        itemBuilder: (context, index) {
+          return Image.file(File(imageList![index].path));
+        },
+      ),
     );
   }
 
