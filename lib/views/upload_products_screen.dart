@@ -25,6 +25,7 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
   List<XFile>? imageList = [];
 
   String mainCategoryValue = 'men';
+  String subCategoryValue = men[0];
 
   void pickProductImages() async {
     try {
@@ -107,6 +108,21 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                           onChanged: ((String? value) {
                             setState(() {
                               mainCategoryValue = value!;
+                            });
+                          }),
+                        ),
+                        const Text('Select Sub Category'),
+                        DropdownButton(
+                          value: subCategoryValue,
+                          items: men.map((e) {
+                            return DropdownMenuItem(
+                              value: e,
+                              child: Text(e),
+                            );
+                          }).toList(),
+                          onChanged: ((String? value) {
+                            setState(() {
+                              subCategoryValue = value!;
                             });
                           }),
                         )
