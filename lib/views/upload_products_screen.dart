@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_vendor/controllers/snack_bar_controller.dart';
+import 'package:multi_vendor/utilities/category_list.dart';
 
 class UploadProductsScreen extends StatefulWidget {
   const UploadProductsScreen({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
 
   List<XFile>? imageList = [];
 
-  String mainCategory = 'men';
+  String mainCategoryValue = 'men';
 
   void pickProductImages() async {
     try {
@@ -96,24 +97,16 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                       children: [
                         const Text('Select Main Category'),
                         DropdownButton(
-                          value: mainCategory,
-                          items: const [
-                            DropdownMenuItem(
-                              value: 'men',
-                              child: Text('men'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'women',
-                              child: Text('women'),
-                            ),
-                            DropdownMenuItem(
-                              value: 'shoes',
-                              child: Text('shoes'),
-                            ),
-                          ],
+                          value: mainCategoryValue,
+                          items: mainCategory.map((e) {
+                            return DropdownMenuItem(
+                              value: e,
+                              child: Text(e),
+                            );
+                          }).toList(),
                           onChanged: ((String? value) {
                             setState(() {
-                              mainCategory = value!;
+                              mainCategoryValue = value!;
                             });
                           }),
                         )
