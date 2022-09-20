@@ -23,6 +23,8 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
 
   List<XFile>? imageList = [];
 
+  String mainCategory = 'men';
+
   void pickProductImages() async {
     try {
       final pickedImages = await _picker.pickMultiImage(
@@ -37,19 +39,30 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
   }
 
   Widget displayImages() {
-    return InkWell(
-      onTap: () {
-        setState(() {
-          imageList = null;
-        });
-      },
-      child: ListView.builder(
-        itemCount: imageList!.length,
-        itemBuilder: (context, index) {
-          return Image.file(File(imageList![index].path));
+    if (imageList!.isNotEmpty) {
+      return InkWell(
+        onTap: () {
+          setState(() {
+            imageList = null;
+          });
         },
-      ),
-    );
+        child: ListView.builder(
+          itemCount: imageList!.length,
+          itemBuilder: (context, index) {
+            return Image.file(File(imageList![index].path));
+          },
+        ),
+      );
+    } else {
+      return const Center(
+        child: Text(
+          'You Have not\n \nPicked any Images',
+          style: TextStyle(
+            fontSize: 18,
+          ),
+        ),
+      );
+    }
   }
 
   @override
@@ -79,7 +92,33 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                               ),
                       ),
                     ),
-                    Text('Category Here')
+                    Column(
+                      children: [
+                        const Text('Select Main Category'),
+                        DropdownButton(
+                          value: mainCategory,
+                          items: const [
+                            DropdownMenuItem(
+                              value: 'men',
+                              child: Text('men'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'women',
+                              child: Text('women'),
+                            ),
+                            DropdownMenuItem(
+                              value: 'shoes',
+                              child: Text('shoes'),
+                            ),
+                          ],
+                          onChanged: ((String? value) {
+                            setState(() {
+                              mainCategory = value!;
+                            });
+                          }),
+                        )
+                      ],
+                    ),
                   ],
                 ),
                 const SizedBox(
