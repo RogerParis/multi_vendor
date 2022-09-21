@@ -24,10 +24,10 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
 
   List<XFile>? imageList = [];
 
-  String mainCategoryValue = 'men';
-  String subCategoryValue = men[0];
+  String mainCategoryValue = 'select main category';
+  String subCategoryValue = 'subcategory';
 
-  List<String> subCategoryList = ['men', 'd', 'Shirt'];
+  List<String> subCategoryList = ['subcategory'];
 
   void pickProductImages() async {
     try {
@@ -69,6 +69,32 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
     }
   }
 
+  void selectMainCategory(String? value) {
+    if (value == 'men') {
+      subCategoryList = men;
+    } else if (value == 'women') {
+      subCategoryList = women;
+    } else if (value == 'electronics') {
+      subCategoryList = electronics;
+    } else if (value == 'accessories') {
+      subCategoryList = accessories;
+    } else if (value == 'shoes') {
+      subCategoryList = shoes;
+    } else if (value == 'home & garden') {
+      subCategoryList = homeAndGarden;
+    } else if (value == 'beauty') {
+      subCategoryList = beauty;
+    } else if (value == 'kids') {
+      subCategoryList = kids;
+    } else if (value == 'bags') {
+      subCategoryList = bags;
+    }
+    setState(() {
+      mainCategoryValue = value!;
+      subCategoryValue = 'subcategory';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,63 +133,7 @@ class _UploadProductsScreenState extends State<UploadProductsScreen> {
                               child: Text(e),
                             );
                           }).toList(),
-                          onChanged: ((String? value) {
-                            if (value == 'men') {
-                              setState(() {
-                                subCategoryValue = 'Shirt';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = men;
-                            } else if (value == 'women') {
-                              setState(() {
-                                subCategoryValue = 'dress';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = women;
-                            } else if (value == 'electronics') {
-                              setState(() {
-                                subCategoryValue = 'phone';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = electronics;
-                            } else if (value == 'accessories') {
-                              setState(() {
-                                subCategoryValue = 'hat';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = accessories;
-                            } else if (value == 'shoes') {
-                              setState(() {
-                                subCategoryValue = 'men slippers';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = shoes;
-                            } else if (value == 'home & garden') {
-                              setState(() {
-                                subCategoryValue = 'living room';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = homeAndGarden;
-                            } else if (value == 'beauty') {
-                              setState(() {
-                                subCategoryValue = 'body care';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = beauty;
-                            } else if (value == 'kids') {
-                              setState(() {
-                                subCategoryValue = 'girls sets';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = kids;
-                            } else if (value == 'bags') {
-                              setState(() {
-                                subCategoryValue = 'wallet';
-                                mainCategoryValue = value!;
-                              });
-                              subCategoryList = bags;
-                            }
-                          }),
+                          onChanged: selectMainCategory,
                         ),
                         const Text('Select Sub Category'),
                         DropdownButton(
